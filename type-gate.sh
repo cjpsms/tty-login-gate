@@ -196,7 +196,6 @@ finish() {
     read -rsn1 _
 }
 
-setfont ter-v24n 2>/dev/null
 stty -echo -icanon
 while :; do
     size; new_text

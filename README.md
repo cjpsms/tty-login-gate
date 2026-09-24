@@ -18,7 +18,6 @@ A monkeytype-style typing test that stands between you and the Linux tty1 login 
 - WPM uses the monkeytype formula: correct characters ÷ 5, per minute. Accuracy counts every mistake, even ones you backspace over.
 - Each attempt picks one of 100 pieces of wrong advice (a-z only, never the same one twice in a row), including 30 about Linux. Example: *vim has no exit you just live there now*.
 - Keys: Backspace deletes a letter, Ctrl+W deletes a word, Tab gives new advice. Ctrl+C, Ctrl+\ and Ctrl+Z are ignored.
-- Switches tty1 to the 12×24 Terminus font (`ter-v24n`), 1.5× the default 8×16, so the text is readable.
 
 It's a toy, not security: passing only gets you to the real login, which still asks for your username and password. Other ttys (Ctrl+Alt+F2…F6) are untouched.
 
@@ -42,7 +41,7 @@ cd tty-login-gate
 ./install.sh
 ```
 
-`install.sh` installs `terminus-font` (on pacman systems), copies `type-gate.sh` to `/usr/local/bin/`, installs the `getty@tty1` override, and restarts tty1. Tested on Arch.
+`install.sh` copies `type-gate.sh` to `/usr/local/bin/`, installs the `getty@tty1` override, and restarts tty1. Tested on Arch.
 
 ## Uninstall
 
@@ -57,7 +56,6 @@ Everything is at the top of `type-gate.sh`:
 - `GOAL=30`: wpm you must beat.
 - `MIN_ACC=90`: minimum accuracy (%).
 - `SENTENCES=(...)`: the advice. Keep entries lowercase a-z and spaces, under about 60 characters.
-- Font: the `setfont ter-v24n` line. Try `ter-v28n` or `ter-v32n` for bigger text.
 
 Re-run `./install.sh` after editing.
 
