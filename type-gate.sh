@@ -9,7 +9,7 @@ CONF=/etc/type-gate.conf
 # Read only whole-number GOAL/MIN_ACC from the config instead of sourcing it (this runs as root).
 if [[ -r $CONF ]]; then
     while IFS='=' read -r key val; do
-        val=${val//[[:space:]]/}
+        val=${val%%#*}; val=${val//[[:space:]]/}
         [[ $val =~ ^[0-9]+$ ]] || continue
         case ${key//[[:space:]]/} in
             GOAL) GOAL=$val ;;

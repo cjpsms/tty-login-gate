@@ -1,6 +1,6 @@
 # tty-login-gate
 
-A monkeytype-style typing test that stands between you and the Linux tty1 login prompt. Type a piece of (deliberately terrible) advice faster than **30 wpm** with at least **90% accuracy**, and you get the normal `login:` prompt. Otherwise, try again. Forever.
+A monkeytype-style typing test that stands between you and the Linux tty1 login prompt. Type a piece of (deliberately terrible) advice faster than **30 wpm** with at least **90% accuracy** (both configurable), and you get the normal `login:` prompt. Otherwise, try again. Forever.
 
 ```
                          T Y P E   G A T E
@@ -41,7 +41,7 @@ cd tty-login-gate
 ./install.sh
 ```
 
-`install.sh` copies `type-gate.sh` to `/usr/local/bin/` and `type-gate.conf` to `/etc/` (if missing), installs the `getty@tty1` override, and restarts tty1. Tested on Arch.
+`install.sh` copies `type-gate.sh` to `/usr/local/bin/` and `type-gate.conf` to `/etc/` (if missing), installs the `getty@tty1` override, and restarts tty1 so the gate shows up right away. If someone is already logged in on tty1 (say, a desktop you started from there), it skips the restart, because restarting would kill that session. The new version then shows up the next time you log out of tty1. Tested on Arch.
 
 ## Uninstall
 
@@ -49,16 +49,25 @@ cd tty-login-gate
 ./uninstall.sh
 ```
 
+Removes the script, `/etc/type-gate.conf` and the override, and puts tty1 back to the normal login prompt.
+
 ## Tweaking
 
 The pass rules live in `/etc/type-gate.conf` (installed from `type-gate.conf` the first time you run `install.sh`, never overwritten after that):
 
 ```
-GOAL=30      # wpm you must beat, e.g. 50
-MIN_ACC=90   # minimum accuracy %, e.g. 100 for zero mistakes
+# wpm you must beat (strictly more than this), e.g. 50
+GOAL=30
+
+# minimum accuracy in percent, e.g. 100 for zero mistakes (even backspaced ones count)
+MIN_ACC=90
 ```
 
-Changes apply on the next attempt, with no reinstall needed. Without the file, the gate falls back to 30 / 90.
+```bash
+sudo nano /etc/type-gate.conf
+```
+
+Changes apply on the next attempt, with no reinstall needed. Whole numbers only. Anything else is ignored, and a missing file or key falls back to 30 / 90.
 
 The advice lives in `SENTENCES=(...)` in `type-gate.sh`. Keep entries lowercase a-z and spaces, under about 60 characters, and re-run `./install.sh` after editing.
 
