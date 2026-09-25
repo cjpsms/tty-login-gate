@@ -3,6 +3,7 @@ set -e
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
 sudo install -m 755 -o root -g root "$DIR/type-gate.sh" /usr/local/bin/type-gate.sh
+[[ -e /etc/type-gate.conf ]] || sudo install -m 644 -o root -g root "$DIR/type-gate.conf" /etc/type-gate.conf
 sudo install -d /etc/systemd/system/getty@tty1.service.d
 sudo install -m 644 "$DIR/getty-tty1-override.conf" /etc/systemd/system/getty@tty1.service.d/override.conf
 sudo systemctl daemon-reload

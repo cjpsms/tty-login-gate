@@ -41,7 +41,7 @@ cd tty-login-gate
 ./install.sh
 ```
 
-`install.sh` copies `type-gate.sh` to `/usr/local/bin/`, installs the `getty@tty1` override, and restarts tty1. Tested on Arch.
+`install.sh` copies `type-gate.sh` to `/usr/local/bin/` and `type-gate.conf` to `/etc/` (if missing), installs the `getty@tty1` override, and restarts tty1. Tested on Arch.
 
 ## Uninstall
 
@@ -51,13 +51,16 @@ cd tty-login-gate
 
 ## Tweaking
 
-Everything is at the top of `type-gate.sh`:
+The pass rules live in `/etc/type-gate.conf` (installed from `type-gate.conf` the first time you run `install.sh`, never overwritten after that):
 
-- `GOAL=30`: wpm you must beat.
-- `MIN_ACC=90`: minimum accuracy (%).
-- `SENTENCES=(...)`: the advice. Keep entries lowercase a-z and spaces, under about 60 characters.
+```
+GOAL=30      # wpm you must beat, e.g. 50
+MIN_ACC=90   # minimum accuracy %, e.g. 100 for zero mistakes
+```
 
-Re-run `./install.sh` after editing.
+Changes apply on the next attempt, with no reinstall needed. Without the file, the gate falls back to 30 / 90.
+
+The advice lives in `SENTENCES=(...)` in `type-gate.sh`. Keep entries lowercase a-z and spaces, under about 60 characters, and re-run `./install.sh` after editing.
 
 ## License
 

@@ -5,6 +5,18 @@ trap '' INT QUIT TSTP
 GOAL=30
 LAST=-1
 MIN_ACC=90
+CONF=/etc/type-gate.conf
+# Read only whole-number GOAL/MIN_ACC from the config instead of sourcing it (this runs as root).
+if [[ -r $CONF ]]; then
+    while IFS='=' read -r key val; do
+        val=${val//[[:space:]]/}
+        [[ $val =~ ^[0-9]+$ ]] || continue
+        case ${key//[[:space:]]/} in
+            GOAL) GOAL=$val ;;
+            MIN_ACC) MIN_ACC=$val ;;
+        esac
+    done < "$CONF"
+fi
 SENTENCES=(
     "never trust a sandwich that looks too happy"
     "always say thank you to the fridge before you close it"
