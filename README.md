@@ -16,7 +16,7 @@ A monkeytype-style typing test that stands between you and the Linux tty1 login 
 - The sentence starts out as a gray placeholder. Typed letters turn white when they're right and red when they're wrong.
 - Time, wpm and accuracy update live. The timer starts on your first keystroke.
 - WPM uses the monkeytype formula: correct characters ÷ 5, per minute. Accuracy counts every mistake, even ones you backspace over.
-- Each attempt picks one of 100 pieces of wrong advice (a-z only, never the same one twice in a row), including 30 about Linux. Example: *vim has no exit you just live there now*.
+- Each attempt picks one of 160 pieces of wrong advice (a-z only, never the same one twice in a row), including 60 about Linux. Example: *vim has no exit you just live there now*.
 - Keys: Backspace deletes a letter, Ctrl+W deletes a word, Tab gives new advice. Ctrl+C, Ctrl+\ and Ctrl+Z are ignored.
 
 It's a toy, not security: passing only gets you to the real login, which still asks for your username and password. Other ttys (Ctrl+Alt+F2…F6) are untouched.
