@@ -5,21 +5,21 @@ A monkeytype-style typing test that stands between you and the Linux tty1 login 
 ```
                          T Y P E   G A T E
      type the gray advice faster than 30 wpm to unlock the login
-                        [1] easy    2  hard
+                             easy mode
 
           never update arch on a monday the packages can smell fear
 
                       12s    41 wpm    96% acc
 
-  timer starts on your first key  -  backspace fixes  -  tab = new advice  -  1 / 2 = mode
+  timer starts on your first key  -  backspace fixes  -  tab = new advice
 ```
 
 - The sentence starts out as a gray placeholder. Typed letters turn white when they're right and red when they're wrong.
 - Time, wpm and accuracy update live. The timer starts on your first keystroke.
 - WPM uses the monkeytype formula: correct characters ÷ 5, per minute. Accuracy counts every mistake, even ones you backspace over.
 - Each attempt picks one of 160 pieces of wrong advice (a-z only, never the same one twice in a row), including 60 about Linux. Example: *vim has no exit you just live there now*.
-- Two modes with the same 160 jokes: **easy** (common words, shorter lines, the default) and **hard** (the original, wordier versions). Press `1` / `2` on the gate screen to switch; it deals a new sentence in that mode.
-- Keys: Backspace deletes a letter, Ctrl+W deletes a word, Tab gives new advice, 1 / 2 switch mode. Ctrl+C, Ctrl+\ and Ctrl+Z are ignored.
+- Three modes, same 160 jokes in each, set with `MODE` in the config: **easy** (common words, ~45 characters, the default), **medium** (the original wording, ~48) and **hard** (bigger words, ~66). The gate shows the current mode under the explanation.
+- Keys: Backspace deletes a letter, Ctrl+W deletes a word, Tab gives new advice. Ctrl+C, Ctrl+\ and Ctrl+Z are ignored.
 
 It's a toy, not security: passing only gets you to the real login, which still asks for your username and password. Other ttys (Ctrl+Alt+F2…F6) are untouched.
 
@@ -64,7 +64,7 @@ GOAL=30
 # minimum accuracy in percent, e.g. 100 for zero mistakes (even backspaced ones count)
 MIN_ACC=90
 
-# advice list to start with: easy or hard (1 / 2 still switch on screen)
+# advice list: easy, medium or hard
 MODE=easy
 ```
 
@@ -72,9 +72,9 @@ MODE=easy
 sudo nano /etc/type-gate.conf
 ```
 
-Changes apply on the next attempt, with no reinstall needed. GOAL / MIN_ACC take whole numbers only and MODE takes `easy` or `hard`. Anything else is ignored, and a missing file or key falls back to 30 / 90 / easy.
+Changes apply on the next attempt, with no reinstall needed. GOAL / MIN_ACC take whole numbers only and MODE takes `easy`, `medium` or `hard`. Anything else is ignored, and a missing file or key falls back to 30 / 90 / easy.
 
-The advice lives in `EASY=(...)` and `HARD=(...)` in `type-gate.sh`. Keep entries lowercase a-z and spaces, under about 60 characters, and re-run `./install.sh` after editing.
+The advice lives in `EASY=(...)`, `MEDIUM=(...)` and `HARD=(...)` in `type-gate.sh`. Keep entries lowercase a-z and spaces, under about 80 characters, and re-run `./install.sh` after editing.
 
 ## License
 

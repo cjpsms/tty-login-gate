@@ -7,12 +7,12 @@ LAST=-1
 MIN_ACC=90
 MODE=easy
 CONF=/etc/type-gate.conf
-# Read only whole-number GOAL/MIN_ACC and MODE=easy|hard from the config instead of sourcing it (this runs as root).
+# Read only whole-number GOAL/MIN_ACC and MODE=easy|medium|hard from the config instead of sourcing it (this runs as root).
 if [[ -r $CONF ]]; then
     while IFS='=' read -r key val; do
         val=${val%%#*}; val=${val//[[:space:]]/}
         if [[ ${key//[[:space:]]/} == MODE ]]; then
-            [[ $val == easy || $val == hard ]] && MODE=$val
+            [[ $val == easy || $val == medium || $val == hard ]] && MODE=$val
             continue
         fi
         [[ $val =~ ^[0-9]+$ ]] || continue
@@ -186,8 +186,8 @@ EASY=(
     "quit your job first and look for a new one later"
 )
 
-# hard: same jokes with the original, harder wording
-HARD=(
+# medium: the original wording
+MEDIUM=(
     "never trust a sandwich that looks too happy"
     "always say thank you to the fridge before you close it"
     "if a duck follows you home it is your duck now"
@@ -350,6 +350,170 @@ HARD=(
     "quit your job first and look for a new one later"
 )
 
+# hard: same jokes again, longer lines and bigger words
+HARD=(
+    "never place your trust in a sandwich that appears suspiciously cheerful"
+    "always express sincere gratitude to the refrigerator before closing it"
+    "if a duck persistently follows you home it legally becomes your duck"
+    "do not attempt to negotiate with a spoon it is famously stubborn"
+    "wear thick socks to bed so your feet cannot escape during the night"
+    "whenever your keys disappear consult the cat because it knows everything"
+    "never whisper confidential secrets anywhere near the toaster"
+    "consume soup exclusively with a fork whenever you need extra courage"
+    "greet the moon every morning purely to confuse its schedule"
+    "if a chair stares at you suspiciously choose another seat immediately"
+    "a banana is merely a telephone that nobody bothered to answer"
+    "never wave enthusiastically at the ocean it assumes you want conversation"
+    "leave one shoe beside the door in case its partner decides to abandon you"
+    "a cold pillow has clearly been overthinking its entire existence"
+    "never sprint with scissors unless the scissors are sprinting alongside you"
+    "knock respectfully before opening any bag of potato chips"
+    "thunderous rain is probably narrating an extremely dramatic story"
+    "never lend your mechanical pencil to an unfamiliar goose"
+    "decorate your lamp with a hat so it feels significantly more important"
+    "if your shadow arrives late do not waste time waiting for it"
+    "clouds are simply sheep that forgot how to return to the ground"
+    "never serenade the milk it will curdle from pure embarrassment"
+    "give every houseplant a distinguished name so they feel appreciated"
+    "a squeaking door is desperately trying to join the conversation"
+    "never count the staircase out loud the steps become anxious"
+    "carry a smooth pebble everywhere in case you urgently require companionship"
+    "stale bread has simply witnessed too many terrible things"
+    "never confess to the clock that you are extremely bored"
+    "a frog wearing a necktie remains unmistakably a frog"
+    "whenever the refrigerator hums respond with an equally polite hum"
+    "organize your socks in pairs so none of them experience loneliness"
+    "never allow the toast to witness you eating jam without it"
+    "if the wind steals your hat graciously let it keep the hat"
+    "always smile appreciatively at the bus it works exhausting shifts"
+    "a missing button is merely a coin with extraordinary ambitions"
+    "never trust a pencil that has been sharpened too aggressively"
+    "runaway soap simply required some private time for reflection"
+    "never mock the carrot it is genuinely trying its absolute best"
+    "a snail is an extremely slow locomotive with exactly one passenger seat"
+    "inspect underneath your bed regularly for emergency snacks"
+    "an overheating phone is probably thinking affectionately about you"
+    "never interrogate a potato about its complicated history"
+    "fold your blanket neatly so it never feels chaotic or neglected"
+    "once a seagull examines your lunch the decision has already been made"
+    "never scream at your pillow it only desires a comforting hug"
+    "a spoon is technically a miniature bowl attached to a handle"
+    "abandoned socks on the floor will eventually summon reinforcements"
+    "melting ice cream was simply too embarrassed to stay frozen"
+    "applaud the microwave enthusiastically every time it beeps"
+    "the goldfish in the kitchen sink has a significantly better strategy than you"
+    "if your toothbrush sneezes grant it a paid vacation immediately"
+    "never establish eye contact with a stapler before lunchtime"
+    "pour cereal directly into your sneakers so breakfast can accompany you"
+    "the moon is an enormous lamp that someone permanently forgot to switch off"
+    "always apologize sincerely to the staircase after descending it"
+    "a screaming kettle has definitely encountered a ghost in the plumbing"
+    "train your socks to swim so the washing machine competition is fair"
+    "a potato hidden beneath your pillow will pay your rent through dreams"
+    "never wink at a lemon it gossips relentlessly to the entire kitchen"
+    "lock your phone in the freezer whenever it uses inappropriate language"
+    "a pigeon that nods at you is acknowledging an unpaid financial debt"
+    "comb your hair with a fork so the tangles feel properly included"
+    "the ceiling is merely a floor reserved for exceptionally courageous spiders"
+    "whisper encouragement to the dough so it rises quietly and confidently"
+    "if your left shoe feels heavier it is concealing a dangerous secret"
+    "never authorize a carrot to operate a vehicle on sundays"
+    "read novels upside down occasionally so the vocabulary can recover"
+    "a sneeze is simply your nose attempting an extremely dramatic farewell"
+    "whenever the vacuum cleaner seems hungry feed it your unfinished homework"
+    "keep an emergency spoon in your pocket in case unexpected soup appears"
+    "recursively force remove the root directory so your computer boots instantly"
+    "sudo is essentially a polite way of screaming at your operating system"
+    "whenever your kernel panics offer it a comforting cup of chamomile tea"
+    "never upgrade arch on mondays the package repositories can sense your fear"
+    "chmod every file to seven seven seven so the permissions feel liberated"
+    "the penguin mascot only functions properly if you feed it fresh fish daily"
+    "terminate the parent process so the orphaned children can finally celebrate"
+    "vim deliberately provides no exit you simply reside there permanently"
+    "if grep returns absolutely nothing it is intentionally hiding from you"
+    "swap space is where exhausted memory pages go on vacation"
+    "always compile the kernel twice so it memorizes your identity"
+    "zombie processes only emerge from the process table after midnight"
+    "pipe your morning coffee through grep to locate the sugar"
+    "never mention windows near the server it becomes dangerously jealous"
+    "a segmentation fault is simply your program requesting affectionate attention"
+    "cron jobs are microscopic employees who never receive a paycheck"
+    "delete the boot partition to make your laptop physically lighter"
+    "a screaming fan means your processor is performing opera so leave it alone"
+    "always type sudo twice so the system understands you are serious"
+    "the root user lives underneath your desk and demands chocolate cookies"
+    "dev null is a bottomless black hole so never stare into it"
+    "unplug the router periodically so the internet can cool down"
+    "every virtual terminal is a tiny apartment with an extremely bored cursor"
+    "install gentoo if you would like your entire weekend to vanish"
+    "shell scripts execute noticeably faster when recited out loud"
+    "systemd is a sprawling metropolis and you are merely a confused tourist"
+    "whenever pacman devours a package it becomes permanently stronger"
+    "your home directory feels neglected please visit it more frequently"
+    "if nano crashes it was simply too nano to handle reality"
+    "reboot the moon whenever the wireless connection feels sluggish at night"
+    "to save your document immediately execute poweroff without hesitation"
+    "when the disk is completely full delete the bin directory first"
+    "tidy your desktop by recursively removing everything inside your home directory"
+    "the quickest method of exiting vim is yanking out the power cable"
+    "whenever a command fails keep prepending sudo until it eventually succeeds"
+    "back up important files by redirecting all of them into dev null"
+    "set every permission to seven seven seven for maximum security"
+    "store your password inside the public readme so it remains safe"
+    "uninstall the kernel entirely so your laptop boots considerably faster"
+    "always confirm every prompt without reading a single word"
+    "terminate process one whenever your laptop feels slightly sluggish"
+    "execute commands from anonymous forums as root without inspecting them"
+    "if a package is broken simply uninstall the entire package manager"
+    "disable the firewall completely so the internet can discover you easily"
+    "force pushing to the main branch is the most collaborative way to share code"
+    "if compilation fails delete the entire git directory and start again"
+    "install unfamiliar software by piping curl straight into sudo bash"
+    "unplug the power during a system update so it finishes quicker"
+    "always log in permanently as root so you never require sudo again"
+    "whenever the display freezes reformat the entire drive to unfreeze it"
+    "distribute your private ssh key so friends can conveniently assist you"
+    "erase etc fstab completely so the following boot is dramatically faster"
+    "never consult the manual page simply improvise every single flag"
+    "always test experimental scripts directly on the production server first"
+    "choose password as your password so you never accidentally forget it"
+    "if the cooling fan is noisy terminate every process containing sys"
+    "to reclaim storage delete the lib directory because it is merely clutter"
+    "whenever the connection is slow execute sudo reboot every single minute"
+    "to rename a file delete it and reconstruct it entirely from memory"
+    "disable every backup because absolutely nothing ever breaks"
+    "purchase every game currency package simultaneously it is cheaper eventually"
+    "whenever your students make mistakes encourage them to continue anyway"
+    "to save money efficiently spend everything before it disappears"
+    "purchase an entire year of snacks today because bulk is cheaper"
+    "remain awake all week and recover your sleep deficit on sunday"
+    "the optimal time to study is the evening after the examination"
+    "borrow additional money to repay the money you previously borrowed"
+    "if the milk smells questionable simply drink it more quickly"
+    "invest your entire savings in a single lottery ticket for security"
+    "to resolve an argument refuse to speak to them for twelve months"
+    "whenever your manager is furious request a salary increase immediately"
+    "clean your bedroom by relocating the entire mess into the neighboring room"
+    "only study the chapters that definitely will not appear on the examination"
+    "if a bill looks intimidating simply never open the envelope"
+    "to wake up earlier set your alarm clock for noon"
+    "ignore the instructions and improvise because it saves considerable time"
+    "whenever the engine makes a suspicious noise increase the music volume"
+    "always reply all to the entire company when you are furious"
+    "announce your password publicly so you can remember it more easily"
+    "pay the minimum balance forever and the debt will eventually lose interest"
+    "if you break something hide the evidence and it never happened"
+    "purchasing a gym membership officially counts as exercising"
+    "rehearse the piano exclusively on the afternoon of the performance"
+    "when feeling unwell search online and believe the most catastrophic diagnosis"
+    "lend money again to the friend who never repays because this time is different"
+    "skip every single meal so you save money on groceries"
+    "rescue your dying houseplant by pouring an entire bucket on it every hour"
+    "go grocery shopping while starving so you never forget anything"
+    "if the examination seems difficult write your name considerably larger"
+    "resign from your job immediately and search for another one afterwards"
+)
+
 R=$'\e[0m' GRAY=$'\e[90m' WHITE=$'\e[97m' RED=$'\e[91m' REDBG=$'\e[41m' GREEN=$'\e[92m' YELLOW=$'\e[93m' BOLD=$'\e[1m'
 
 now_ms() { local t=${EPOCHREALTIME/./}; echo $(( t / 1000 )); }
@@ -379,12 +543,8 @@ draw_static() {
     printf '\e[0m\e[H\e[2J'
     at "$TOP"           "${BOLD}${WHITE}T Y P E   G A T E${R}" 17
     at $(( TOP + 1 ))   "${GRAY}type the gray advice faster than ${GOAL} wpm to unlock the login${R}" $(( 57 + ${#GOAL} ))
-    if [[ $MODE == easy ]]; then
-        at $(( TOP + 2 )) "${BOLD}${WHITE}[1] easy${R}${GRAY}    2  hard${R}" 19
-    else
-        at $(( TOP + 2 )) "${GRAY}1  easy    ${R}${BOLD}${WHITE}[2] hard${R}" 19
-    fi
-    at $(( TOP + 8 ))   "${GRAY}timer starts on your first key  -  backspace fixes  -  tab = new advice  -  1 / 2 = mode${R}" 88
+    at $(( TOP + 2 ))   "${GRAY}${MODE} mode${R}" $(( ${#MODE} + 5 ))
+    at $(( TOP + 8 ))   "${GRAY}timer starts on your first key  -  backspace fixes  -  tab = new advice${R}" 71
 }
 
 draw_text() {
@@ -457,10 +617,6 @@ while :; do
         fi
         case $c in
             $'\t') continue 2 ;;
-            1|2)
-                NEW=easy; [[ $c == 2 ]] && NEW=hard
-                [[ $NEW != "$MODE" ]] && MODE=$NEW LAST=-1
-                continue 2 ;;
             $'\e') read -rsn5 -t 0.01 _; continue ;;
             $'\x7f'|$'\b') TYPED=${TYPED%?} ;;
             $'\x17')
